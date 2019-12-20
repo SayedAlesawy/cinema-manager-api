@@ -17,5 +17,8 @@ class CreateUser < ActiveRecord::Migration[5.2]
       # Handles timestamps
       t.timestamps
     end
+
+    add_index :users, :email
+    add_index :users, :username
   end
 end
