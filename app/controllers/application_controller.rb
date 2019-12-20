@@ -21,4 +21,12 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing do |_exception|
     render json: { message: 'paramter is missing' }, status: 400
   end
+
+  rescue_from Screening::InvalidSeatNumber do |_exception|
+    render json: { message: 'seat number is invalid' }, status: 400
+  end
+
+  rescue_from Screening::ResourceReserved do |_exception|
+    render json: { message: 'seat is already reserved' }, status: 400
+  end
 end

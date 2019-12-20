@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
     get 'screenings' => 'screenings#index'
     get 'screenings/:id' => 'screenings#find'
+    get 'screenings/:id/seat_map_status' => 'screenings#seat_map_status'
     post 'screenings/create' => 'screenings#create'
-    post 'screenings/reserve' => 'screenings#reserve'
+    post 'screenings/:id/reserve/:seat_id' => 'screenings#reserve'
   end
 end

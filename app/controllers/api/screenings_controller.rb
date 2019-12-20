@@ -7,6 +7,7 @@ module Api
 
     before_action :authenticate_user
     before_action :authorized?, only: [:create]
+    before_action :load_screening, only: %i[reserve seat_map_status]
 
     def index
       screenings = Screening.find_each.map do |screening|
@@ -25,10 +26,28 @@ module Api
     def create
       screening = Screening.create!(screening_params)
 
+      screening.init_seat_map
+
       render json: decorate(screening), status: 201
     end
 
+    def reserve
+      seat_number = params[:seat_id]
+
+      @current_screening.reserve_seat(seat_number.to_i)
+
+      render json: { seat_map: @current_screening.seat_map }, status: 201
+    end
+
+    def seat_map_status
+      render json: { seat_map: @current_screening.seat_map }, status: 200
+    end
+
     private
+
+    def load_screening
+      @current_screening = Screening.find(params[:id])
+    end
 
     def decorate(screening)
       {
