@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     get 'screenings' => 'screenings#index'
     get 'screenings/:id' => 'screenings#find'
     post 'screenings/create' => 'screenings#create'
+    post 'screenings/reserve' => 'screenings#reserve'
   end
 end

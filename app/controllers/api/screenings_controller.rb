@@ -2,7 +2,11 @@
 
 module Api
   class ScreeningsController < ApplicationController
+    include AdminAuthorizable
     include ScreeningParams
+
+    before_action :authenticate_user
+    before_action :authorized?, only: [:create]
 
     def index
       screenings = Screening.find_each.map do |screening|
@@ -23,6 +27,8 @@ module Api
 
       render json: decorate(screening), status: 201
     end
+
+    private
 
     def decorate(screening)
       {
