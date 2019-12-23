@@ -57,7 +57,7 @@ module Api
         movie_name: screening.movie.name,
         movie_genre: screening.movie.genre,
         movie_duration: screening.movie.duration,
-        screen_id: screening.screen.number
+        screen_number: screening.screen.number
       }
     end
   end
