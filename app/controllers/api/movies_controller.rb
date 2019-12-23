@@ -18,6 +18,7 @@ module Api
 
     def decorate(movie)
       {
+        id: movie.id,
         name: movie.name,
         genre: movie.genre,
         duration: movie.duration
