@@ -54,8 +54,10 @@ module Api
         id: screening.id,
         start_time: screening.start_time,
         end_time: screening.end_time,
-        movie_id: screening.movie_id,
-        screen_id: screening.screen_id
+        movie_name: screening.movie.name,
+        movie_genre: screening.movie.genre,
+        movie_duration: screening.movie.duration,
+        screen_id: screening.screen.number
       }
     end
   end
