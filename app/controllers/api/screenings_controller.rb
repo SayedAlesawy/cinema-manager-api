@@ -20,7 +20,12 @@ module Api
     def find
       screening = Screening.find(params[:id])
 
-      render json: decorate(screening), status: 200
+      render json: decorate(screening).merge(
+        seat_map: screening.seat_map,
+        screen_number: screening.screen.number,
+        screen_rows: screening.screen.rows,
+        screen_cols: screening.screen.columns
+      ), status: 200
     end
 
     def create
@@ -56,8 +61,7 @@ module Api
         end_time: screening.end_time,
         movie_name: screening.movie.name,
         movie_genre: screening.movie.genre,
-        movie_duration: screening.movie.duration,
-        screen_number: screening.screen.number
+        movie_duration: screening.movie.duration
       }
     end
   end
